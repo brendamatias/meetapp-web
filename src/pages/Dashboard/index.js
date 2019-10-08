@@ -78,6 +78,7 @@ export default function Dashboard() {
                   <MdChevronLeft color="#fff" size={30} />
                 </button>
               )}
+
               <span>{page}</span>
 
               {meetups.length > 0 && (
