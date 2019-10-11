@@ -1,12 +1,12 @@
 import React from 'react';
-import { Form, Input } from '@rocketseat/unform';
+import { Form, Input, Textarea } from '@rocketseat/unform';
 import * as Yup from 'yup';
 
 import { toast } from 'react-toastify';
 
 import api from '~/services/api';
 
-import { Container } from './styles';
+import { Container } from '~/styles/FormMeetup/styles';
 
 import FileInput from '~/components/FileInput';
 
@@ -35,6 +35,7 @@ export default function New({ history }) {
       const { id } = response.data;
 
       history.push(`/details/${id}`);
+      toast.success('Meetup criado com sucesso!');
     } catch (err) {
       toast.error('Ops, não foi possível incluir o meetup.');
     }
@@ -45,7 +46,7 @@ export default function New({ history }) {
       <Form schema={schema} onSubmit={handleSubmit}>
         <FileInput name="file_id" />
         <Input name="title" placeholder="Título do Meetup" />
-        <Input name="description" placeholder="Descrição completa" />
+        <Textarea name="description" placeholder="Descrição completa" />
         <Input name="location" placeholder="Localização" />
         <div>
           <button type="submit">Salvar meetup</button>

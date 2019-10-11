@@ -9,7 +9,7 @@ import api from '~/services/api';
 import { Container } from './styles';
 
 export default function FileInput() {
-  const { defaultValue, registerField } = useField('banner');
+  const { defaultValue, registerField } = useField('file');
 
   const [file, setFile] = useState(defaultValue && defaultValue.id);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
@@ -19,7 +19,7 @@ export default function FileInput() {
   useEffect(() => {
     if (ref.current) {
       registerField({
-        name: 'banner_id',
+        name: 'file_id',
         ref: ref.current,
         path: 'dataset.file',
       });
@@ -30,7 +30,7 @@ export default function FileInput() {
     const data = new FormData();
 
     data.append('file', e.target.files[0]);
-    data.append('type', 'banner');
+    data.append('type', 'file');
 
     try {
       const response = await api.post('files', data);
