@@ -4,9 +4,6 @@ import { darken } from 'polished';
 import colors from '~/styles/colors';
 
 export const Container = styled.div`
-  max-width: 940px;
-  margin: 50px auto;
-
   form {
     display: flex;
     flex-direction: column;

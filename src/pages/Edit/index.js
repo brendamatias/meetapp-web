@@ -21,7 +21,7 @@ import {
 const formatDate = d =>
   format(d, "dd ' de ' MMMM ', às ' H'h'", { locale: pt });
 
-export default function Details({ history, match }) {
+export default function Edit({ history, match }) {
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
 
   const id = useMemo(
@@ -118,7 +118,7 @@ export default function Details({ history, match }) {
   );
 }
 
-Details.propTypes = {
+Edit.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,

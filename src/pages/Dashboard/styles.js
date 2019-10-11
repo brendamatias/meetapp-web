@@ -4,8 +4,6 @@ import { darken } from 'polished';
 import colors from '~/styles/colors';
 
 export const Container = styled.div`
-  max-width: 940px;
-  margin: 50px auto 0;
   color: #fff;
 
   header {
@@ -18,7 +16,9 @@ export const Container = styled.div`
       font-size: 32px;
     }
 
-    button {
+    a {
+      display: flex;
+      align-items: center;
       background: ${colors.pink};
       border: 0;
       border-radius: 4px;

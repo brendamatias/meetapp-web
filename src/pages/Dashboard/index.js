@@ -51,7 +51,7 @@ export default function Dashboard() {
     <Container>
       <header>
         <strong>Meus meetups</strong>
-        <button type="button">Novo meetup</button>
+        <Link to="/new">Novo meetup</Link>
       </header>
       <nav>
         {!loading ? (
