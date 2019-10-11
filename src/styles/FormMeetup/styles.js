@@ -8,7 +8,8 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
 
-    input {
+    input,
+    textarea {
       background: rgba(0, 0, 0, 0.2);
       border: 0;
       border-radius: 4px;
@@ -20,6 +21,12 @@ export const Container = styled.div`
       &::placeholder {
         color: rgba(255, 255, 255, 0.5);
       }
+    }
+
+    textarea {
+      padding-top: 20px;
+      resize: none;
+      height: 200px;
     }
 
     span {
@@ -49,4 +56,12 @@ export const Container = styled.div`
       }
     }
   }
+`;
+
+export const Loading = styled.div`
+  display: flex;
+  flex: 1;
+  margin-top: 150px;
+  justify-content: center;
+  align-items: center;
 `;

@@ -1,124 +1,90 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Form, Input, Textarea } from '@rocketseat/unform';
+import * as Yup from 'yup';
 
 import { toast } from 'react-toastify';
 
-import { format, parseISO } from 'date-fns';
-import pt from 'date-fns/locale/pt-BR';
-import { MdClose } from 'react-icons/md';
-
-import colors from '~/styles/colors';
 import api from '~/services/api';
 
-import {
-  Container,
-  Loading,
-  Button,
-  Meetup,
-  CancellationModal,
-} from './styles';
+import { Container, Loading } from '~/styles/FormMeetup/styles';
 
-const formatDate = d =>
-  format(d, "dd ' de ' MMMM ', às ' H'h'", { locale: pt });
+import FileInput from '~/components/FileInput';
 
-export default function Edit({ history, match }) {
-  const [cancelModalOpen, setCancelModalOpen] = useState(false);
+const schema = Yup.object().shape({
+  file_id: Yup.number()
+    .transform(value => (!value ? undefined : value))
+    .required('Imagem obrigatória.'),
+  title: Yup.string()
+    .min(6, 'O título precisa de no mínimo 6 caracteres.')
+    .max(35, 'O título não pode ter mais que 35 caracteres.')
+    .required('Título obrigatório.'),
+  description: Yup.string()
+    .max(250, 'A descrição não pode ter mais que 250 caracteres.')
+    .required('Descrição obrigatória.'),
+  location: Yup.string()
+    .min(6, 'A localização precisa de no mínimo 6 caracteres.')
+    .max(100, 'A localização não pode ter mais que 100 caracteres')
+    .required('Localização obrigatória.'),
+  date: Yup.date().required('Data obrigatória.'),
+});
 
-  const id = useMemo(
-    () => ({
-      value: match.params.id,
-    }),
-    [match.params.id]
-  );
+export default function New({ history, match }) {
+  const id = useMemo(() => match.params.id, [match.params.id]);
 
-  const [loading, setLoading] = useState(true);
-  const [meetup, setMeetup] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [meetup, setMeetup] = useState(null);
 
   useEffect(() => {
-    async function loadMeetups() {
-      const { data } = await api.get(`organizing/${id.value}`);
+    async function loadMeetup() {
+      try {
+        setLoading(true);
 
-      data.date = formatDate(parseISO(data.date));
+        const { data } = await api.get(`organizing/${id}`);
 
-      setMeetup(data);
-      setLoading(false);
+        setMeetup(data);
+        setLoading(false);
+      } catch (err) {
+        toast.error('Ops, erro interno.');
+      }
     }
 
-    loadMeetups();
-  }, [id.value]);
+    loadMeetup();
+  }, [id]);
 
-  async function handleCancelMeetup() {
+  async function handleSubmit(data) {
     try {
-      await api.delete(`meetups/${id.value}`);
+      await api.put(`meetups/${id}`, data);
 
-      history.push('/meetups');
+      history.push(`/details/${id}`);
+      toast.success('Meetup atualizado com sucesso!');
     } catch (err) {
-      toast.error('Ops, ocorreu um erro ao tentar deleter o meetup :(');
+      toast.error('Ops, erro ao atualizar o meetup.');
     }
   }
 
   return (
-    <Container>
-      <header>
-        <strong>{meetup.title}</strong>
-        <div>
-          <Button
-            color={colors.blue}
-            onClick={() => history.push(`/edit/${id.value}`)}
-          >
-            Editar
-          </Button>
-          <Button color={colors.pink} onClick={() => setCancelModalOpen(true)}>
-            Cancelar
-          </Button>
-        </div>
-      </header>
+    <>
       {!loading ? (
-        <>
-          <Meetup>
-            <img src={meetup.file.url} alt={meetup.title} />
-            <p>{meetup.description}</p>
+        <Container>
+          <Form initialData={meetup} schema={schema} onSubmit={handleSubmit}>
+            <FileInput name="file_id" />
+            <Input name="title" placeholder="Título do Meetup" />
+            <Textarea name="description" placeholder="Descrição completa" />
+            <Input name="location" placeholder="Localização" />
             <div>
-              <span>{meetup.date}</span>
-              <span>{meetup.location}</span>
+              <button type="submit">Salvar meetup</button>
             </div>
-          </Meetup>
-
-          <CancellationModal open={cancelModalOpen}>
-            <div className="content">
-              <header>
-                <span>Deseja mesmo cancelar esse meetup?</span>
-                <button
-                  onClick={() => setCancelModalOpen(false)}
-                  className="close"
-                  type="button"
-                >
-                  <MdClose color="#fff" size={24} />
-                </button>
-              </header>
-
-              <div>
-                <Button
-                  color={colors.pink}
-                  onClick={() => setCancelModalOpen(false)}
-                >
-                  Não
-                </Button>
-                <Button color={colors.blue} onClick={handleCancelMeetup}>
-                  Sim, cancelar meetup!
-                </Button>
-              </div>
-            </div>
-          </CancellationModal>
-        </>
+          </Form>
+        </Container>
       ) : (
         <Loading>Carregando...</Loading>
       )}
-    </Container>
+    </>
   );
 }
 
-Edit.propTypes = {
+New.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
