@@ -30,6 +30,10 @@ export const Container = styled.div`
       &:hover {
         background: ${darken(0.03, colors.pink)};
       }
+
+      svg {
+        margin-right: 5px;
+      }
     }
   }
 `;

@@ -37,6 +37,15 @@ export const Button = styled.button`
   &:hover {
     background: ${props => darken(0.03, props.color)};
   }
+
+  span {
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-right: 5px;
+    }
+  }
 `;
 
 export const Meetup = styled.div`

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt-BR';
-import { MdClose } from 'react-icons/md';
+import { MdClose, MdEdit, MdDeleteForever } from 'react-icons/md';
 
 import colors from '~/styles/colors';
 import api from '~/services/api';
@@ -66,10 +66,14 @@ export default function Details({ history, match }) {
             color={colors.blue}
             onClick={() => history.push(`/edit/${id.value}`)}
           >
-            Editar
+            <span>
+              <MdEdit color="#FFf" size={16} /> Editar
+            </span>
           </Button>
           <Button color={colors.pink} onClick={() => setCancelModalOpen(true)}>
-            Cancelar
+            <span>
+              <MdDeleteForever color="#FFf" size={16} /> Cancelar
+            </span>
           </Button>
         </div>
       </header>
@@ -105,7 +109,7 @@ export default function Details({ history, match }) {
                   Não
                 </Button>
                 <Button color={colors.blue} onClick={handleCancelMeetup}>
-                  Sim, cancelar meetup!
+                  Sim, cancelar!
                 </Button>
               </div>
             </div>

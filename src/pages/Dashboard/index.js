@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt-BR';
 import {
+  MdAddCircleOutline,
   MdChevronLeft,
   MdChevronRight,
   MdSentimentDissatisfied,
@@ -51,7 +52,10 @@ export default function Dashboard() {
     <Container>
       <header>
         <strong>Meus meetups</strong>
-        <Link to="/new">Novo meetup</Link>
+        <Link to="/new">
+          <MdAddCircleOutline color="#FFf" size={20} />
+          Novo meetup
+        </Link>
       </header>
       <nav>
         {!loading ? (
