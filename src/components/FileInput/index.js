@@ -11,6 +11,7 @@ import { Container } from './styles';
 
 export default function FileInput() {
   const { defaultValue, registerField } = useField('file');
+  const { error } = useField('file_id');
 
   const [file, setFile] = useState(defaultValue && defaultValue.id);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
@@ -61,6 +62,7 @@ export default function FileInput() {
           ref={ref}
         />
       </label>
+      {error && <span>{error}</span>}
     </Container>
   );
 }

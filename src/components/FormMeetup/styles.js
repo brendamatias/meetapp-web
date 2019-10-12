@@ -59,6 +59,7 @@ export const Button = styled.div`
     transition: background 0.2s;
     max-width: 185px;
     color: #fff;
+    margin-bottom: 15px;
 
     svg {
       margin-right: 5px;

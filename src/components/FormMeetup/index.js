@@ -35,10 +35,10 @@ export default function FormMeetup({ meetup, handleSubmit, loading }) {
         <Container>
           <Form initialData={meetup} schema={schema} onSubmit={handleSubmit}>
             <FileInput name="file_id" />
-            <Input name="title" placeholder="Título do Meetup" />
-            <Textarea name="description" placeholder="Descrição completa" />
-            <DatePicker name="date" placeholder="Data do meetup" />
-            <Input name="location" placeholder="Localização" />
+            <Input name="title" placeholder="Title" />
+            <Textarea name="description" placeholder="Description" />
+            <DatePicker name="date" placeholder="Date" />
+            <Input name="location" placeholder="Location" />
             <Button>
               <button type="submit">
                 <MdSave color="#FFf" size={16} />
