@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
+import { parseISO } from 'date-fns';
 
 import api from '~/services/api';
 
@@ -19,7 +20,11 @@ export default function New({ history, match }) {
 
         const { data } = await api.get(`organizing/${id}`);
 
-        setMeetup(data);
+        setMeetup({
+          ...data,
+          date: parseISO(data.date),
+        });
+
         setLoading(false);
       } catch (err) {
         toast.error('Ops, erro interno.');
@@ -30,6 +35,7 @@ export default function New({ history, match }) {
   }, [id]);
 
   async function handleSubmit(data) {
+    console.log(data);
     try {
       await api.put(`meetups/${id}`, data);
 

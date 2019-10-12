@@ -17,6 +17,11 @@ export const Container = styled.div`
       padding: 0 20px;
       color: #fff;
       margin: 0 0 10px;
+      width: 100%;
+
+      &:focus {
+        border-left: 2px solid ${colors.pink};
+      }
 
       &::placeholder {
         color: rgba(255, 255, 255, 0.5);
@@ -34,33 +39,33 @@ export const Container = styled.div`
       margin: 0 0 10px;
       font-weight: bold;
     }
+  }
+`;
 
-    div {
-      display: flex;
-      justify-content: flex-end;
+export const Button = styled.div`
+  display: flex;
+  justify-content: flex-end;
 
-      button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
-        padding: 12px 30px;
-        background: ${colors.pink};
-        font-weight: bold;
-        border-radius: 4px;
-        border: 0;
-        transition: background 0.2s;
-        max-width: 185px;
-        color: #fff;
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 12px 30px;
+    background: ${colors.pink};
+    font-weight: bold;
+    border-radius: 4px;
+    border: 0;
+    transition: background 0.2s;
+    max-width: 185px;
+    color: #fff;
 
-        svg {
-          margin-right: 5px;
-        }
+    svg {
+      margin-right: 5px;
+    }
 
-        &:hover {
-          background: ${darken(0.03, colors.pink)};
-        }
-      }
+    &:hover {
+      background: ${darken(0.03, colors.pink)};
     }
   }
 `;

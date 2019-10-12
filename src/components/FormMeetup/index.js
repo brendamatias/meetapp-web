@@ -4,9 +4,10 @@ import { Form, Input, Textarea } from '@rocketseat/unform';
 import * as Yup from 'yup';
 
 import { MdSave } from 'react-icons/md';
-import { Container, Loading } from './styles';
+import { Container, Button, Loading } from './styles';
 
 import FileInput from '~/components/FileInput';
+import DatePicker from '~/components/DatePicker';
 
 const schema = Yup.object().shape({
   file_id: Yup.number()
@@ -35,13 +36,14 @@ export default function FormMeetup({ meetup, handleSubmit, loading }) {
             <FileInput name="file_id" />
             <Input name="title" placeholder="Título do Meetup" />
             <Textarea name="description" placeholder="Descrição completa" />
+            <DatePicker name="date" placeholder="Data do meetup" />
             <Input name="location" placeholder="Localização" />
-            <div>
+            <Button>
               <button type="submit">
                 <MdSave color="#FFf" size={16} />
                 Salvar meetup
               </button>
-            </div>
+            </Button>
           </Form>
         </Container>
       ) : (
