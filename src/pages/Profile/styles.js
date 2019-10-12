@@ -38,23 +38,6 @@ export const Container = styled.div`
       margin: 20px 0;
     }
 
-    button {
-      margin: 5px 0 0;
-      width: 162px;
-      height: 50px;
-      background: ${colors.pink};
-      font-weight: bold;
-      color: #fff;
-      border: 0;
-      border-radius: 4px;
-      font-size: 16px;
-      transition: background 0.2s;
-
-      &:hover {
-        background: ${darken(0.03, colors.pink)};
-      }
-    }
-
     a {
       color: #fff;
       margin-top: 20px;
@@ -64,6 +47,35 @@ export const Container = styled.div`
       &:hover {
         opacity: 1;
       }
+    }
+  }
+`;
+
+export const Button = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0 0;
+    width: 167px;
+    height: 50px;
+    background: ${colors.pink};
+    font-weight: bold;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background 0.2s;
+
+    &:hover {
+      background: ${darken(0.03, colors.pink)};
+    }
+
+    svg {
+      margin-right: 5px;
     }
   }
 `;

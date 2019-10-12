@@ -1,9 +1,10 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { format, parseISO } from 'date-fns';
 import { toast } from 'react-toastify';
-import { parseISO } from 'date-fns';
 
 import api from '~/services/api';
+import { getError } from '~/util/errorHandler';
 
 import FormMeetup from '~/components/FormMeetup';
 
@@ -27,7 +28,7 @@ export default function New({ history, match }) {
 
         setLoading(false);
       } catch (err) {
-        toast.error('Ops, erro interno.');
+        toast.error(getError(err) || 'Internal error!');
       }
     }
 
@@ -35,20 +36,24 @@ export default function New({ history, match }) {
   }, [id]);
 
   async function handleSubmit(data) {
-    console.log(data);
     try {
+      data.date = format(new Date(data.date), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
       await api.put(`meetups/${id}`, data);
 
       history.push(`/details/${id}`);
-      toast.success('Meetup atualizado com sucesso!');
+      toast.success('Meetup updated successfully!');
     } catch (err) {
-      toast.error('Ops, erro ao atualizar o meetup.');
+      toast.error(getError(err) || 'Internal error!');
     }
   }
 
   return (
     <>
-      <FormMeetup meetup={meetup} onSubmit={handleSubmit} loading={loading} />
+      <FormMeetup
+        meetup={meetup}
+        handleSubmit={handleSubmit}
+        loading={loading}
+      />
     </>
   );
 }

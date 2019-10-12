@@ -10,9 +10,9 @@ import logo from '~/assets/logo.svg';
 
 const schema = Yup.object().shape({
   email: Yup.string()
-    .email('Informe um e-mail válido')
-    .required('O e-mail é obrigatório'),
-  password: Yup.string().required('A senha é obrigatória'),
+    .email('Enter a valid email')
+    .required('Email is required.'),
+  password: Yup.string().required('Password is required.'),
 });
 
 export default function SignIn() {
@@ -28,15 +28,11 @@ export default function SignIn() {
       <img src={logo} alt="Meetapp" />
 
       <Form schema={schema} onSubmit={handleSubmit}>
-        <Input name="email" type="email" placeholder="Digite seu e-mail" />
-        <Input
-          name="password"
-          type="password"
-          placeholder="Sua senha secreta"
-        />
+        <Input name="email" type="email" placeholder="Your email" />
+        <Input name="password" type="password" placeholder="Your password" />
 
-        <button type="submit">{loading ? 'Carregando...' : 'Entrar'}</button>
-        <Link to="/register">Criar conta grátis</Link>
+        <button type="submit">{loading ? 'Loading...' : 'Login'}</button>
+        <Link to="/register">Register for free!</Link>
       </Form>
     </>
   );

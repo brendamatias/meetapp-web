@@ -13,8 +13,7 @@ import api from '~/services/api';
 
 import { Container, MeetupCard, NoMeetup, Pagination, Loading } from './styles';
 
-const formatDate = d =>
-  format(d, "dd ' de ' MMMM ', às ' H'h'", { locale: pt });
+const formatDate = d => format(d, "dd ' de ' MMMM', at ' H'h'", { locale: pt });
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(false);
@@ -51,10 +50,10 @@ export default function Dashboard() {
   return (
     <Container>
       <header>
-        <strong>Meus meetups</strong>
+        <strong>My meetups</strong>
         <Link to="/new">
           <MdAddCircleOutline color="#FFf" size={20} />
-          Novo meetup
+          New meetup
         </Link>
       </header>
       <nav>
@@ -72,7 +71,7 @@ export default function Dashboard() {
             ) : (
               <NoMeetup>
                 <MdSentimentDissatisfied color="#fff" size={40} />
-                <span>Que pena, você não tem nenhum meetup.</span>
+                <span>You have no any meetup.</span>
               </NoMeetup>
             )}
 

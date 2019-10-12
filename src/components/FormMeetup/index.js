@@ -12,19 +12,20 @@ import DatePicker from '~/components/DatePicker';
 const schema = Yup.object().shape({
   file_id: Yup.number()
     .transform(value => (!value ? undefined : value))
-    .required('Imagem obrigatória.'),
+    .required('You must insert a banner for meetup!'),
   title: Yup.string()
-    .min(6, 'O título precisa de no mínimo 6 caracteres.')
-    .max(35, 'O título não pode ter mais que 35 caracteres.')
-    .required('Título obrigatório.'),
+    .min(6, 'Title must have at least 6 characters!')
+    .max(35, 'Title can not exceed 20 characters!')
+    .required('Title can not be empty!'),
   description: Yup.string()
-    .max(250, 'A descrição não pode ter mais que 250 caracteres.')
-    .required('Descrição obrigatória.'),
+    .min(10, 'Title must have at least 10 characters!')
+    .max(250, 'Description can not exceed 250 characters!')
+    .required('Description can not be empty!'),
   location: Yup.string()
-    .min(6, 'A localização precisa de no mínimo 6 caracteres.')
-    .max(100, 'A localização não pode ter mais que 100 caracteres')
-    .required('Localização obrigatória.'),
-  date: Yup.date().required('Data obrigatória.'),
+    .min(6, 'Location must have at least 6 characters.')
+    .max(100, 'Location can not exceed 100 characters!')
+    .required('Location can not be empty!'),
+  date: Yup.date().required('Date can not be empty!'),
 });
 
 export default function FormMeetup({ meetup, handleSubmit, loading }) {
@@ -41,13 +42,13 @@ export default function FormMeetup({ meetup, handleSubmit, loading }) {
             <Button>
               <button type="submit">
                 <MdSave color="#FFf" size={16} />
-                Salvar meetup
+                Save meetup
               </button>
             </Button>
           </Form>
         </Container>
       ) : (
-        <Loading>Carregando...</Loading>
+        <Loading>Loading...</Loading>
       )}
     </>
   );

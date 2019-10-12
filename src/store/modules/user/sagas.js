@@ -2,6 +2,7 @@ import { takeLatest, call, put, all } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import api from '~/services/api';
+import { getError } from '~/util/errorHandler';
 
 import { updateProfileSuccess, updateProfileFailure } from './actions';
 
@@ -16,11 +17,11 @@ export function* updateProfile({ payload }) {
 
     const response = yield call(api.put, 'users', profile);
 
-    toast.success('Perfil atualizado com sucesso!');
+    toast.success('Profile updated successfully!');
 
     yield put(updateProfileSuccess(response.data));
   } catch (err) {
-    toast.error('Falha ao atualizar perfil, verifique seus dados.');
+    toast.error(getError(err) || 'Internal error!');
 
     yield put(updateProfileFailure());
   }

@@ -9,13 +9,13 @@ import logo from '~/assets/logo.svg';
 import { signUpRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({
-  name: Yup.string().required('O nome é obrigatório'),
+  name: Yup.string().required('Name is required'),
   email: Yup.string()
-    .email('Informe um e-mail válido')
-    .required('O e-mail é obrigatório'),
+    .email('Enter a valid email')
+    .required('Email is required'),
   password: Yup.string()
-    .min(6, 'A senha precisa ter no minímo 6 caracteres')
-    .required('A senha é obrigatória'),
+    .min(6, 'Your password must have at least 6 characters')
+    .required('Password is required'),
 });
 
 export default function SignUp() {
@@ -30,16 +30,16 @@ export default function SignUp() {
       <img src={logo} alt="Meetapp" />
 
       <Form schema={schema} onSubmit={handleSubmit}>
-        <Input name="name" type="text" placeholder="Nome Completo" />
-        <Input name="email" type="email" placeholder="Digite seu e-mail" />
+        <Input name="name" type="text" placeholder="Your full name" />
+        <Input name="email" type="email" placeholder="Your email" />
         <Input
           name="password"
           type="password"
-          placeholder="Sua senha secreta"
+          placeholder="Your secret password"
         />
 
-        <button type="submit">Criar conta</button>
-        <Link to="/">Já tenho login</Link>
+        <button type="submit">Create an account</button>
+        <Link to="/">I am already registered</Link>
       </Form>
     </>
   );

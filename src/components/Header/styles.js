@@ -38,6 +38,10 @@ export const Profile = styled.div`
       display: block;
       margin-top: 2px;
       color: #999;
+
+      &:hover {
+        color: ${colors.pink};
+      }
     }
   }
 
@@ -46,7 +50,7 @@ export const Profile = styled.div`
     border: 0;
     border-radius: 4px;
     height: 42px;
-    width: 71px;
+    padding: 0 25px;
     color: #fff;
     font-weight: bold;
 

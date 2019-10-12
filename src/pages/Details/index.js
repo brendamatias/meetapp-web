@@ -8,7 +8,9 @@ import pt from 'date-fns/locale/pt-BR';
 import { MdClose, MdEdit, MdDeleteForever } from 'react-icons/md';
 
 import colors from '~/styles/colors';
+
 import api from '~/services/api';
+import { getError } from '~/util/errorHandler';
 
 import {
   Container,
@@ -18,8 +20,7 @@ import {
   CancellationModal,
 } from './styles';
 
-const formatDate = d =>
-  format(d, "dd ' de ' MMMM ', às ' H'h'", { locale: pt });
+const formatDate = d => format(d, "dd ' de ' MMMM', at ' H'h'", { locale: pt });
 
 export default function Details({ history, match }) {
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
@@ -53,7 +54,7 @@ export default function Details({ history, match }) {
 
       history.push('/meetups');
     } catch (err) {
-      toast.error('Ops, ocorreu um erro ao tentar deleter o meetup :(');
+      toast.error(getError(err) || 'Internal error!');
     }
   }
 
@@ -67,12 +68,12 @@ export default function Details({ history, match }) {
             onClick={() => history.push(`/edit/${id.value}`)}
           >
             <span>
-              <MdEdit color="#FFf" size={16} /> Editar
+              <MdEdit color="#FFf" size={16} /> Edit
             </span>
           </Button>
           <Button color={colors.pink} onClick={() => setCancelModalOpen(true)}>
             <span>
-              <MdDeleteForever color="#FFf" size={16} /> Cancelar
+              <MdDeleteForever color="#FFf" size={16} /> Cancel
             </span>
           </Button>
         </div>
@@ -91,7 +92,7 @@ export default function Details({ history, match }) {
           <CancellationModal open={cancelModalOpen}>
             <div className="content">
               <header>
-                <span>Deseja mesmo cancelar esse meetup?</span>
+                <span>Do you really want to cancel this meetup?</span>
                 <button
                   onClick={() => setCancelModalOpen(false)}
                   className="close"
@@ -106,10 +107,10 @@ export default function Details({ history, match }) {
                   color={colors.pink}
                   onClick={() => setCancelModalOpen(false)}
                 >
-                  Não
+                  No
                 </Button>
                 <Button color={colors.blue} onClick={handleCancelMeetup}>
-                  Sim, cancelar!
+                  Yes, cancel!
                 </Button>
               </div>
             </div>

@@ -26,11 +26,11 @@ export default function Header() {
           <Profile>
             <div>
               <strong>{profile.name}</strong>
-              <Link to="/profile">Meu perfil</Link>
+              <Link to="/profile">My profile</Link>
             </div>
 
             <button type="button" onClick={handleSignout}>
-              Sair
+              Sign out
             </button>
           </Profile>
         </aside>

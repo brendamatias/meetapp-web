@@ -2,9 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
 
+import { MdSave } from 'react-icons/md';
 import { updateProfileRequest } from '~/store/modules/user/actions';
 
-import { Container } from './styles';
+import { Container, Button } from './styles';
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -18,17 +19,30 @@ export default function Profile() {
   return (
     <Container>
       <Form initialData={profile} onSubmit={handleSubmit}>
-        <Input name="name" placeholder="Nome completo" />
-        <Input name="email" type="email" placeholder="Endereço de e-mail" />
+        <Input name="name" placeholder="Your full name" />
+        <Input name="email" type="email" placeholder="Your email" />
         <hr />
-        <Input name="password" type="oldPassword" placeholder="Senha atual" />
-        <Input name="password" type="password" placeholder="Nova senha" />
+        <Input
+          name="oldPassword"
+          type="password"
+          placeholder="Your current password"
+        />
         <Input
           name="password"
-          type="confirmPassword"
-          placeholder="Confirmação de senha"
+          type="password"
+          placeholder="Your new password"
         />
-        <button type="submit">Salvar perfil</button>
+        <Input
+          name="confirmPassword"
+          type="password"
+          placeholder="Confirm new password"
+        />
+        <Button>
+          <button type="submit">
+            <MdSave color="#FFf" size={16} />
+            Save profile
+          </button>
+        </Button>
       </Form>
     </Container>
   );

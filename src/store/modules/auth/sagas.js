@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 
 import history from '~/services/history';
 import api from '~/services/api';
+import { getError } from '~/util/errorHandler';
 
 import { signInSuccess, signUpSuccess, signFailure } from './actions';
 
@@ -23,7 +24,7 @@ export function* signIn({ payload }) {
 
     history.push('/dashboard');
   } catch (err) {
-    toast.error('Falha na autenticação, verifique seus dados.');
+    toast.error(getError(err) || 'Internal error!');
     yield put(signFailure());
   }
 }
@@ -41,9 +42,9 @@ export function* signUp({ payload }) {
     yield put(signUpSuccess());
 
     history.push('/');
-    toast.success('Registrado com sucesso!');
+    toast.success('Successfully registered!');
   } catch (err) {
-    toast.error('Falha no cadastro, verifique seus dados.');
+    toast.error(getError(err) || 'Internal error!');
 
     yield put(signFailure());
   }

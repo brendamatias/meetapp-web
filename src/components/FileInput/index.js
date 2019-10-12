@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { MdAddAPhoto } from 'react-icons/md';
 
 import api from '~/services/api';
+import { getError } from '~/util/errorHandler';
 
 import { Container } from './styles';
 
@@ -40,7 +41,7 @@ export default function FileInput() {
       setFile(id);
       setPreview(url);
     } catch (err) {
-      toast.error('Ops, falha ao inserir imagem.');
+      toast.error(getError(err) || 'Internal error!');
     }
   }
 
